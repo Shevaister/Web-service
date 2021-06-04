@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Оцінка кількості людей по фотогра</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link rel="stylesheet" href="{% static '/client/css/bootstrap.min.css' %}">
+<link rel="shortcut icon" href="{% static '/client/css/images/user-check-solid-green.png' %}" type="image/png">
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+<link href="{% static '/client/css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+<link href="{% static '/client/css/fonts.css' %}" rel="stylesheet" type="text/css" media="all" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{% static '/client/js/main.js' %}"></script>
+
+<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+
+<style>
+
+#upbutton {
+    height: 60px;
+    width: 60px;
+    bottom: 30px;
+    right: 30px;
+    cursor: pointer;
+    display: none;
+    position: fixed;
+    z-index: 999;
+  }
+
+.fa-angle-double-up:hover {
+  	color: #6fac1b !important;
+  	background: rgba(0, 0, 0, .1) !important;
+  	border-radius: 5% 5% 0 0; 
+  }
+
+
+#preview img {
+    width: 100px;
+    height: 100px;
+  }
+
+
+</style>
+</head>
+
+<body>	
+<div id="header-wrapper">
+	<div id="header" class="container">
+		<div id="logo">
+			<h1><span class="fa fa-bolt"></span><a>Discharge</a></h1>
+		</div>
+		<div id="menu">
+			<ul>
+				{% if user.is_authenticated %}
+					<li><a href="/accounts/logout" accesskey="3" class="cd-signin" title=""> {{ user.username }} <span class="fa fa-sign-in">&nbsp;Sign out</span></a></li>
+				{% else %}
+					<li><a href="/accounts/signup" accesskey="3" class="cd-signin" title=""><span class="fa fa-sign-in">&nbsp;Sign in/Sign up</span></a></li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</div>
+{% if user.is_authenticated %}
+<div id="wrapper">
+	<div id="featured-wrapper">
+		<div id="featured" class="extra margin-btm container">
+			<div class="main-title">
+				<h2 id="begin">Початок роботи</h2>
+				<span class="byline">Просто завантажте фото</span> 
+			</div>
+			
+			<div class="ebox1"> <i class="fa fa-picture-o"></i>
+				<div class="title">
+					<h2>Завантажте ваше фото</h2>
+					<span class="byline">Виберіть фотографії</span> 
+				</div>
+				<form enctype="multipart/form-data" method="post" action = "/upload">
+				{% csrf_token %} 
+					<div class="input__wrapper">
+	   					<input name="cover" type="file" id="input__file" class="input input__file" accept = "image/jpeg,image/png" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
+	   					<label for="input__file" class="input__file-button">
+	      				<span class="input__file-icon-wrapper"><img class="input__file-icon" src="{% static '/client/css/images/upload-solid-white.png' %}" width="25"></span>
+	      				<span class="input__file-button-text">Виберіть файл</span>
+	   					</label>
+					</div>
+			</div>
+			<img id = "blah" />
+			<br>
+			<button type = "submit" class = "button" style = "height: 50px; width: 310px; padding: .3em .3em; font-size: 20px "> Upload and count </button>
+			<br>
+		</form>
+		<iframe id=hiddenframe name=hiddenframe style="width:0px; height:0px; border:0px"></iframe>
+			{% if photos|length %}
+		{% for photo in photos reversed %}
+			<img src="{{ photo.photo.url }}"/>
+			<figcaption style = "font-size: 30px; font-weight: 600;font-family: Arial, Helvetica, sans-serif;">Кількість людей на фото: {{ photo.number_of_humans }}<br> <a class = "button" style = "height: 25px; padding: .3em .3em; font-size: 12px " href = "{{ photo.photo.url }}" download> download </a> &nbsp; <a class = "button" style = "height: 25px; padding: .3em .3em; font-size: 12px " href = "delete/{{ photo.id }}"> delete </a> </figcaption>
+		{% endfor %}
+	{% endif %}
+		</div>
+	</div>
+</div>
+<p>
+	
+<p>
+{% else %}
+<div id="header-featured">
+	<div id="banner-wrapper">
+		<div id="banner" class="container">
+			<h2>Оцінка кількості людей на зображенні</h2>
+			<p style = "font-size: 30px; font-weight: 600;font-family: Arial, Helvetica, sans-serif; color: #FFFFFF">Наша система створена на основі перетворень зображення в бінарний формат, де ми можемо за допомогою натренованих датасета розуміти де обличчя людини. Ваше завдання дати нам зображення з людьми які дивляться в об'єктив, а ми повернемо вам зображення з особами і кількістю людей</p>
+		</div>
+	</div>
+</div>
+{% endif %}
+<div id="copyright" class="container">
+	<p>&copy; Discharge. All rights reserved 2021</p>
+</div>
+	<script src = "{% static '/client/js/jquery-3.6.0.js' %}" crossorigin = "anonymous"></script>
+    <script src = "{% static '/client/js/bootstrap.min.js' %}" crossorigin = "anonymous"></script>
+</body>
+</html>

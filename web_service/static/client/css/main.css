@@ -1,0 +1,45 @@
+@import
+url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+@media (max-width: 480px) {
+h1 {
+font-size: 18px;
+}
+}
+
+div > h1 {
+color: 	#FFFFFF;
+font-family: 'Ubuntu', sans-serif;
+}
+
+body > div > nav > div > a > h4 {
+color: 	#FFFFFF;
+font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+background-image: url('fancy-pants.jpg');
+background-repeat: repeat-y;
+background-size: cover;
+}
+
+div.container-image > img {
+width: 100%;
+
+}
+
+form {
+  text-align: center;
+  color: #FFFFFF;
+}
+
+table {
+	width: 100%;
+	text-align: center;
+	color: #FFFFFF;
+	border: 1px;
+}
+
+a {
+	text-decoration: none;
+}

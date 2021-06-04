@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Оценка количества людей по фотографиям</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link rel="stylesheet" href="{% static '/client/css/bootstrap.min.css' %}">
+<link rel="shortcut icon" href="{% static '/client/css/images/user-check-solid-green.png' %}" type="image/png">
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+<link href="{% static '/client/css/form.css' %}" rel="stylesheet" type="text/css" media="all" />
+<link href="{% static '/client/css/fonts.css' %}" rel="stylesheet" type="text/css" media="all" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{% static '/client/js/auth.js' %}"></script>
+
+<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+
+</head>
+
+<body>
+	<div class="container">
+  <div class="frame">
+    <div class="nav">
+      <ul class="links">
+        <li class="signin-active"><a class="btn"><i class="fa fa-sign-in"></i>&nbsp;Sign in</a></li>&nbsp;&nbsp;&nbsp;&nbsp;
+        <li class="signup-inactive"><a class="btn"><i class="fa fa-list-ul"></i>&nbsp;Sign up </a></li>
+      </ul>
+    </div>
+    <div ng-app ng-init="checked = false">
+		<form class="form-signin" action="signin" method="post" name="form">
+      {% csrf_token %}
+          <label for="username">Логін:</label>
+          <input class="form-styling" type="text" name="username" placeholder="" required/>
+          <label for="password">Пароль:</label>
+          <input class="form-styling" id="password-input" type="text" name="password" autocomplete="off" placeholder="" style="font-family: 'Glyphter'" required/>
+          <div>
+            <br>
+            <input type = "submit" class="btn-signin" value = "Вход"/>
+          </div>
+		</form>
+        
+		<form class="form-signup" action="register" method="post" name="form">
+      {% csrf_token %}
+          <label for="fullname">Логін:</label>
+          <input class="form-styling" type="text" name="fullname" placeholder="" pattern="^[a-zA-Z0-9+-_@]+$" required/>
+          <label for="email">Email:</label>
+          <input class="form-styling" type="text" name="email" placeholder="" pattern="" required/>
+          <label for="password">Придумайте пароль:</label>
+          <input class="form-styling" type="text" name="password" autocomplete="off" placeholder="" pattern="^[a-zA-Z0-9]{8,}(?=.*[a-zA-Z/w])[^@]+$" style="font-family: 'Glyphter'" required/>
+          
+          <input type = "submit" class="btn-signup" id="sign-up" value = "Зарегистрироваться"/>
+
+		</form>
+      
+    <div class="forgot">
+    	<a href="#">Forgot your password?</a>
+    </div>
+  <script src = "{% static '/client/js/jquery-3.6.0.js' %}" crossorigin = "anonymous"></script>
+    <script src = "{% static '/client/js/bootstrap.min.js' %}" crossorigin = "anonymous"></script>
+</body>
+</html>

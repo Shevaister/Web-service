@@ -1,0 +1,5 @@
+C:\Users\ADMIN\source\repos\Project\Project\obj\Debug\Project.csprojAssemblyReference.cache
+C:\Users\ADMIN\source\repos\Project\Project\obj\Debug\Project.Form1.resources
+C:\Users\ADMIN\source\repos\Project\Project\obj\Debug\Project.Properties.Resources.resources
+C:\Users\ADMIN\source\repos\Project\Project\obj\Debug\Project.csproj.GenerateResource.cache
+C:\Users\ADMIN\source\repos\Project\Project\obj\Debug\Project.csproj.CoreCompileInputs.cache
